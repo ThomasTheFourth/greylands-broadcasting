@@ -10,11 +10,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_06_201817) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_07_022902) do
   create_table "channels", force: :cascade do |t|
     t.string "name"
     t.string "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "stream_videos", force: :cascade do |t|
+    t.integer "stream_id", null: false
+    t.integer "video_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["stream_id"], name: "index_stream_videos_on_stream_id"
+    t.index ["video_id"], name: "index_stream_videos_on_video_id"
+  end
+
+  create_table "streams", force: :cascade do |t|
+    t.string "title"
+    t.string "performer"
+    t.integer "year_released"
+    t.string "record_label"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "videos", force: :cascade do |t|
+    t.string "youtube_url"
+    t.string "stream_url"
+    t.string "backup_url"
+    t.string "api_key"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "stream_videos", "streams"
+  add_foreign_key "stream_videos", "videos"
 end

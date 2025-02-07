@@ -19,3 +19,29 @@ Migrating to CreateChannels (20250206201817)
   [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20250206201817') RETURNING "version" /*application='GreylandsBroadcasting'*/[0m
   [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='GreylandsBroadcasting'*/[0m
   [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='GreylandsBroadcasting'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='GreylandsBroadcasting'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='GreylandsBroadcasting'*/[0m
+Migrating to CreateStreams (20250207022848)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='GreylandsBroadcasting'*/[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "streams" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar, "performer" varchar, "year_released" integer, "record_label" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL) /*application='GreylandsBroadcasting'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20250207022848') RETURNING "version" /*application='GreylandsBroadcasting'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='GreylandsBroadcasting'*/[0m
+Migrating to CreateVideos (20250207022855)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='GreylandsBroadcasting'*/[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "videos" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "youtube_url" varchar, "stream_url" varchar, "backup_url" varchar, "api_key" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL) /*application='GreylandsBroadcasting'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20250207022855') RETURNING "version" /*application='GreylandsBroadcasting'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='GreylandsBroadcasting'*/[0m
+Migrating to CreateStreamVideos (20250207022902)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='GreylandsBroadcasting'*/[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "stream_videos" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "stream_id" integer NOT NULL, "video_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_944baedf19"
+FOREIGN KEY ("stream_id")
+  REFERENCES "streams" ("id")
+, CONSTRAINT "fk_rails_5bc11c0cd2"
+FOREIGN KEY ("video_id")
+  REFERENCES "videos" ("id")
+) /*application='GreylandsBroadcasting'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_stream_videos_on_stream_id" ON "stream_videos" ("stream_id") /*application='GreylandsBroadcasting'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_stream_videos_on_video_id" ON "stream_videos" ("video_id") /*application='GreylandsBroadcasting'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20250207022902') RETURNING "version" /*application='GreylandsBroadcasting'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='GreylandsBroadcasting'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='GreylandsBroadcasting'*/[0m
