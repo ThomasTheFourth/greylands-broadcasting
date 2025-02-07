@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  youtube_url: MyString
+  stream_url: MyString
+  backup_url: MyString
+  api_key: MyString
+
+two:
+  youtube_url: MyString
+  stream_url: MyString
+  backup_url: MyString
+  api_key: MyString

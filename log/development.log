@@ -45,3 +45,19 @@ FOREIGN KEY ("video_id")
   [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20250207022902') RETURNING "version" /*application='GreylandsBroadcasting'*/[0m
   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='GreylandsBroadcasting'*/[0m
   [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='GreylandsBroadcasting'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='GreylandsBroadcasting'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='GreylandsBroadcasting'*/[0m
+Migrating to CreatePlays (20250207172928)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='GreylandsBroadcasting'*/[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "plays" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "stream_id" integer NOT NULL, "video_id" integer NOT NULL, "played_at" datetime(6), "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_f8d21d5b65"
+FOREIGN KEY ("stream_id")
+  REFERENCES "streams" ("id")
+, CONSTRAINT "fk_rails_3faf2b058a"
+FOREIGN KEY ("video_id")
+  REFERENCES "videos" ("id")
+) /*application='GreylandsBroadcasting'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_plays_on_stream_id" ON "plays" ("stream_id") /*application='GreylandsBroadcasting'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_plays_on_video_id" ON "plays" ("video_id") /*application='GreylandsBroadcasting'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20250207172928') RETURNING "version" /*application='GreylandsBroadcasting'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='GreylandsBroadcasting'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='GreylandsBroadcasting'*/[0m
